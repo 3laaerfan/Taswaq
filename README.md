@@ -252,7 +252,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 - GitHub: [@3laaerfan](https://github.com/3laaerfan)
 - LinkedIn: [Alaa Erfan](https://www.linkedin.com/in/alaa-erfan/)
-- Email: your.email@example.com
 
 ## 🙏 Acknowledgments
 
