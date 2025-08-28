@@ -13,7 +13,7 @@
 
 ## 📸 Screenshots
 
-![Homepage Desktop](imgs/Taswaq Screenshot.png)
+![Homepage Desktop](imgs/Taswaq%20Screenshot.png)
 
 ## ✨ Features
 
