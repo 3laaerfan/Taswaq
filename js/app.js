@@ -48,6 +48,22 @@ window.confirmPurchase = function () {
   showSuccessMessage();
 };
 
+
+
+// ===== Navbar =====
+
+document.addEventListener("DOMContentLoaded", function () {
+  const toggler = document.querySelector(".navbar-toggler");
+  const navMenu = document.querySelector("#navbarNav");
+
+  toggler.addEventListener("click", function () {
+    navMenu.classList.toggle("show");
+  });
+});
+
+
+
+
 // ===== STORAGE FUNCTIONS =====
 const Storage = {
   // Users operations
@@ -449,9 +465,9 @@ function initContactView() {
     if (!isValid) return;
 
     // Show success popup using reusable function
-     showPopup(
-    "📩 Message Sent!",
-    `
+    showPopup(
+      "📩 Message Sent!",
+      `
     <div style="text-align:center;">
       <div class="text-success mb-2">
         <i class="fas fa-check-circle" style="font-size: 2rem; color: green;"></i>
@@ -459,29 +475,23 @@ function initContactView() {
       <p style="font-size:0.9rem; margin: 0;">Thank you for your message!<br>We will get back to you soon.</p>
     </div>
     `,
-    () => {
-      // On OK → reset form and clear errors
-      contactForm.reset();
-      clearError(nameInput);
-      clearError(emailInput);
-      clearError(messageInput);
-    },
-    false // showCancel = false → only OK button appears
-  );
+      () => {
+        // On OK → reset form and clear errors
+        contactForm.reset();
+        clearError(nameInput);
+        clearError(emailInput);
+        clearError(messageInput);
+      },
+      false // showCancel = false → only OK button appears
+    );
 
-
-
-
-
-
-
-  // Compact styling for OK button
-  const okBtn = document.getElementById("popupOkBtn");
-  if (okBtn) {
-    okBtn.textContent = "OK";
-    okBtn.style.fontSize = "0.85rem";
-    okBtn.style.padding = "6px 14px";
-  }
+    // Compact styling for OK button
+    const okBtn = document.getElementById("popupOkBtn");
+    if (okBtn) {
+      okBtn.textContent = "OK";
+      okBtn.style.fontSize = "0.85rem";
+      okBtn.style.padding = "6px 14px";
+    }
   });
 }
 
@@ -642,7 +652,7 @@ function showPopup(
   `;
 
   // Button styling
-  [popupOkBtn, popupCancelBtn].forEach(btn => {
+  [popupOkBtn, popupCancelBtn].forEach((btn) => {
     btn.style.cssText = `
       padding: 10px 22px;
       border: none;
@@ -658,44 +668,50 @@ function showPopup(
   // Specific colors
   popupOkBtn.style.background = "#0d6efd";
   popupOkBtn.style.color = "#fff";
-  popupOkBtn.addEventListener("mouseover", () => popupOkBtn.style.background = "#0b5ed7");
-  popupOkBtn.addEventListener("mouseout", () => popupOkBtn.style.background = "#0d6efd");
+  popupOkBtn.addEventListener(
+    "mouseover",
+    () => (popupOkBtn.style.background = "#0b5ed7")
+  );
+  popupOkBtn.addEventListener(
+    "mouseout",
+    () => (popupOkBtn.style.background = "#0d6efd")
+  );
 
   popupCancelBtn.style.background = "#6c757d";
   popupCancelBtn.style.color = "#fff";
-  popupCancelBtn.addEventListener("mouseover", () => popupCancelBtn.style.background = "#5c636a");
-  popupCancelBtn.addEventListener("mouseout", () => popupCancelBtn.style.background = "#6c757d");
+  popupCancelBtn.addEventListener(
+    "mouseover",
+    () => (popupCancelBtn.style.background = "#5c636a")
+  );
+  popupCancelBtn.addEventListener(
+    "mouseout",
+    () => (popupCancelBtn.style.background = "#6c757d")
+  );
 
+  // Reset old listeners
+  const newOkBtn = popupOkBtn.cloneNode(true);
+  popupOkBtn.parentNode.replaceChild(newOkBtn, popupOkBtn);
+  const newCancelBtn = popupCancelBtn.cloneNode(true);
+  popupCancelBtn.parentNode.replaceChild(newCancelBtn, popupCancelBtn);
 
-// Reset old listeners
-const newOkBtn = popupOkBtn.cloneNode(true);
-popupOkBtn.parentNode.replaceChild(newOkBtn, popupOkBtn);
-const newCancelBtn = popupCancelBtn.cloneNode(true);
-popupCancelBtn.parentNode.replaceChild(newCancelBtn, popupCancelBtn);
+  // Set button texts
+  newOkBtn.textContent = okText;
+  newCancelBtn.textContent = cancelText;
 
-// Set button texts
-newOkBtn.textContent = okText;
-newCancelBtn.textContent = cancelText;
+  // Show/hide cancel button on the cloned element
+  newCancelBtn.style.display = showCancel ? "inline-block" : "none";
 
-// Show/hide cancel button on the cloned element
-newCancelBtn.style.display = showCancel ? "inline-block" : "none";
+  // Button actions
+  newOkBtn.addEventListener("click", () => {
+    popup.style.display = "none";
+    if (onOk) onOk();
+  });
 
-// Button actions
-newOkBtn.addEventListener("click", () => {
-  popup.style.display = "none";
-  if (onOk) onOk();
-});
-
-newCancelBtn.addEventListener("click", () => {
-  popup.style.display = "none";
-  if (onCancel) onCancel();
-});
-
-
+  newCancelBtn.addEventListener("click", () => {
+    popup.style.display = "none";
+    if (onCancel) onCancel();
+  });
 }
-
-
-
 
 function initRegistration() {
   const registerForm = document.getElementById("register-form");
@@ -835,8 +851,6 @@ function initRegistration() {
     }
   });
 
-
-  
   const togglePasswordBtn = document.getElementById("toggle-password");
   const toggleConfirmBtn = document.getElementById("toggle-confirm-password");
 
@@ -1082,10 +1096,10 @@ function addToCart(productId, quantity) {
     () => {
       console.log("OK clicked → continue shopping");
     },
-    true,                     // show cancel button
+    true, // show cancel button
     () => navigateTo("cart-view"), // Purchase Now action
-    "OK",                     // OK button text
-    "Purchase Now"            // Cancel button text
+    "OK", // OK button text
+    "Purchase Now" // Cancel button text
   );
 }
 
@@ -1142,17 +1156,23 @@ function showProductDetails(productId) {
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <img src="${product.image}" class="img-fluid rounded" alt="${product.name}">
+                    <img src="${
+                      product.image
+                    }" class="img-fluid rounded" alt="${product.name}">
                 </div>
                 <div class="col-md-6">
                     <h4>${product.name}</h4>
                     <p class="text-muted">${product.category}</p>
                     <h4 class="text-primary">$${product.price.toFixed(2)}</h4>
-                    <p><strong>Availability:</strong> ${product.stock} in stock</p>
+                    <p><strong>Availability:</strong> ${
+                      product.stock
+                    } in stock</p>
                     <p><strong>Size:</strong> ${product.size}</p>
                     <div class="d-flex align-items-center mb-3">
                         <label for="product-quantity" class="me-2 fw-bold">Quantity:</label>
-                        <input type="number" id="product-quantity" class="form-control" min="1" max="${product.stock}" value="1" style="width: 80px;">
+                        <input type="number" id="product-quantity" class="form-control" min="1" max="${
+                          product.stock
+                        }" value="1" style="width: 80px;">
                     </div>
                     <button class="btn btn-primary w-100" onclick="window.addToCartFromModal(${productId})">
                         <i class="fas fa-cart-plus me-2"></i> Add to Cart
@@ -1167,28 +1187,13 @@ function showProductDetails(productId) {
   const closeModal = () => document.body.removeChild(modal);
 
   modal.querySelector("#close-modal").addEventListener("click", closeModal);
-  modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
-  modal.querySelector(".modal-content").addEventListener("click", (e) => e.stopPropagation());
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+  modal
+    .querySelector(".modal-content")
+    .addEventListener("click", (e) => e.stopPropagation());
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function filterProducts() {
   const priceFilter = document.getElementById("price-filter").value;
@@ -1618,7 +1623,7 @@ function showCheckoutModal() {
                 <div class="row mb-3">
                     <div class="col-6">
                         <label for="checkout-expiry" class="form-label">Expiry Date *</label>
-                        <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" id="checkout-expiry" required  
+                        <input type="text" class="form-control" id="checkout-expiry" required  
                                placeholder="MM/YY" maxlength="5">
                     </div>
                     <div class="col-6">
@@ -1796,21 +1801,22 @@ function showCheckoutConfirmation() {
   const total = subtotal + shipping + tax;
 
   //  Show popup with OK & Cancel
-  
 
-showPopup(
-  "💳 Confirm Payment",
-  `Total Amount: $${total.toFixed(2)}\nThis amount will be charged to your card.`,
-  () => {
-    completeCheckout();
-  },
-  true, // showCancel
-  () => {
-    console.log("❌ Payment canceled");
-  },
-  "OK",       // OK button text
-  "Cancel"    // Cancel button text
-);
+  showPopup(
+    "💳 Confirm Payment",
+    `Total Amount: $${total.toFixed(
+      2
+    )}\nThis amount will be charged to your card.`,
+    () => {
+      completeCheckout();
+    },
+    true, // showCancel
+    () => {
+      console.log("❌ Payment canceled");
+    },
+    "OK", // OK button text
+    "Cancel" // Cancel button text
+  );
 }
 
 function completeCheckout() {
@@ -1896,3 +1902,4 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   updateUI();
 });
+
