@@ -18,6 +18,36 @@ body {
   min-height: 100vh;
 }
 
+
+
+/*navbar*/
+
+#navbarNav {
+  display: none;
+}
+
+/* When toggled open */
+#navbarNav.show {
+  display: block;
+}
+
+/* On large screens, keep it flex */
+@media (min-width: 992px) {
+  #navbarNav {
+    display: flex !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 .auth-container {
   background: linear-gradient(135deg, #f8f9fc 0%, #e2e8f0 100%);
   min-height: 100vh;
