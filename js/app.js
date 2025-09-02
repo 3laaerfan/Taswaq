@@ -1383,41 +1383,40 @@ function displayCartItems() {
       item.name
     }" class="img-fluid rounded">
                 </div>
-                <div class="col-md-4">
-                    <h5>${item.name}</h5>
-                    <p class="text-muted">Size: ${item.size}</p>
+                <div class="col-md-4 justify-content-center">
+                    <h5 class="text-center">${item.name}</h5>
+                    <p class="text-muted text-center">Size: ${item.size}</p>
                     ${
                       maxReached
                         ? '<p class="text-danger"><small>Max available in stock</small></p>'
                         : ""
                     }
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 text-center">
                     <p class="fw-bold">$${item.price.toFixed(2)}</p>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 ">
                     <div class="quantity-controls">
-                        <button class="btn btn-sm btn-outline-secondary decrease-quantity" data-id="${
+                        <button class="btn btn-sm btn-outline-secondary decrease-quantity " data-id="${
                           item.productId
                         }">-</button>
-                        <span class="mx-2">${item.quantity}</span>
-                        <button class="btn btn-sm btn-outline-secondary increase-quantity" data-id="${
+                        <span class="mx-auto">${item.quantity}</span>
+                        <button class="btn btn-sm btn-outline-secondary increase-quantity align-items-center" data-id="${
                           item.productId
                         }" ${maxReached ? "disabled" : ""}>
                             ${maxReached ? "✓" : "+"}
                         </button>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <button class="btn btn-sm btn-danger remove-item" data-id="${
+                <div class="col-2 mt-4 mt-md-0 mx-auto">
+                    <button class="btn btn-sm btn-danger remove-item  ms-3 ms-md-0" data-id="${
                       item.productId
-                    }">
+                    }" >
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
             </div>
         `;
-
     cartContainer.appendChild(cartItem);
   });
 
