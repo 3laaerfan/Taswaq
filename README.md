@@ -9,7 +9,7 @@
 
 ## 🚀 Live Demo
 
-[View Live Demo](https://3laaerfan.github.io/taswaq/) | [Report Bug](https://github.com/3laaerfan/Taswaq/issues) | [Request Feature](https://github.com/3laaerfan/Taswaq/issues)
+[View Live Demo](https://3laaerfan.github.io/Taswaq/) | [Report Bug](https://github.com/3laaerfan/Taswaq/issues) | [Request Feature](https://github.com/3laaerfan/Taswaq/issues)
 
 ## 📸 Screenshots
 
